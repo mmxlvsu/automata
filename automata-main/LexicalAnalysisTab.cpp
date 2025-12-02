@@ -1,4 +1,5 @@
 #include "LexicalAnalysisTab.h"
+#include "DiagramBuilder.h"
 #include <QFont>
 #include <QTableWidgetItem>
 #include <QHeaderView>
@@ -39,17 +40,49 @@ LexicalAnalysisTab::LexicalAnalysisTab(QWidget* parent)
 
     // ================= DFA AREA (IMAGE PLACEHOLDER) =================
     int dfaY = runY + 40;
+
+    // Title label
     dfa = new QLabel("DFA Diagram", this);
     dfa->setFont(QFont("Poppins", 14, QFont::Bold));
     dfa->move(leftX, dfaY);
 
+    // Create scene and view
     dfaScene = new QGraphicsScene(this);
-    dfaView = new QGraphicsView(dfaScene, this);
-    dfaView->setGeometry(leftX, dfaY + 40, 900, 600);
+    dfaView  = new QGraphicsView(dfaScene, this);
+
+    // View size and position
+    dfaView->setGeometry(leftX, dfaY + 40, 900, 300);
     dfaView->setStyleSheet("background-color: white; border: 1px solid #aaa;");
 
-    QGraphicsTextItem* placeholder = dfaScene->addText("Place DFA Image Here");
-    placeholder->setPos(350, 250);
+    // Enable scrollbars for panning/swiping
+    dfaView->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    dfaView->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+    // Optional: make dragging the scene with mouse
+    dfaView->setDragMode(QGraphicsView::ScrollHandDrag);
+
+    // 1. Build the diagram
+    DiagramBuilder::buildExampleDiagram(dfaScene);
+
+    // 2. Get the exact size of the diagram
+    QRectF diagramBounds = dfaScene->itemsBoundingRect();
+
+    // 3. Expand scene to contain everything
+    dfaScene->setSceneRect(diagramBounds);
+
+// 4. Do NOT scale to fit – allow scrolling
+// dfaView->fitInView(diagramBounds, Qt::KeepAspectRatio); // remove this
+
+// Optional: smooth rendering
+dfaView->setRenderHint(QPainter::Antialiasing);
+
+
+
+
+    // Optional placeholder
+    // QGraphicsTextItem* placeholder = dfaScene->addText("Place DFA Image Here");
+    // placeholder->setPos(350, 250);
+
 
     // ================= TOKEN TABLE (RIGHT SIDE) =================
     QVBoxLayout* rightLayout = new QVBoxLayout();

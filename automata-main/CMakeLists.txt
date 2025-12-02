@@ -4,7 +4,7 @@ project(automata)
 set(CMAKE_CXX_STANDARD 17)
 
 # Qt install path (change if needed)
-set(CMAKE_PREFIX_PATH "C:/Qt/6.10.1/mingw_64")
+set(CMAKE_PREFIX_PATH "D:\\Qt\\6.10.1\\mingw_64\\lib\\cmake\\Qt6")
 
 # Find Qt packages
 find_package(Qt6 COMPONENTS Core Widgets REQUIRED)
@@ -30,6 +30,10 @@ add_executable(MyQtApp
     AssignmentParser.cpp
     DelimiterParser.cpp
     OperationParser.cpp
+    DiagramBuilder.cpp
+    DiagramBuilder.h
+    DrawHelper.cpp
+    DrawHelper.h
 )
 
 # Link Qt libraries
