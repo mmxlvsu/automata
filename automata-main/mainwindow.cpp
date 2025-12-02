@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ProjectOverviewTab.h"
-#include "LexicalAnalysisTab.h"
+#include "LexicalAnalysis.h"
 #include "SyntaxAnalysisTab.h"
 #include "NFASimulatorTab.h" 
 
