@@ -365,7 +365,7 @@ LexicalAnalysisTab::LexicalAnalysisTab(QWidget* parent)
 
     QWidget* rightContainer = new QWidget(this);
     rightContainer->setLayout(rightLayout);
-    rightContainer->setGeometry(950, 20, 900, 950);
+    rightContainer->setGeometry(950, 20, 900, 650);
 
 
     // Animation timer

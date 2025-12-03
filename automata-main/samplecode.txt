@@ -6,3 +6,28 @@ if result >= 10:
     print(result)
 else:
     result = result + 1
+
+
+def add_numbers(a, b):
+    result = a + b
+    return result
+
+i = 1 
+while i < 6:   
+    print(i)   
+    i += 1
+
+for i in range(5):
+    print(i)
+
+
+count = 1
+
+while count <= 5:
+    if count == 1:
+        print(f"Count is {count}. Starting loop.")
+    elif count == 3:
+        print(f"Count is {count}. Halfway there.")
+    else:
+        print(f"Count is {count}.")
+    count += 1
