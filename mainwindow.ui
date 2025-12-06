@@ -1,0 +1,105 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QSpacerItem>
+#include <QSizePolicy>
+#include <QHeaderView>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+
+    // ================================
+    // Central widget layout (for fullscreen scaling)
+    // ================================
+    QVBoxLayout* centralLayout = new QVBoxLayout(ui->centralwidget);
+    centralLayout->addWidget(ui->tabWidget);  // QTabWidget fills the window
+    ui->centralwidget->setLayout(centralLayout);
+
+    // ================================
+    // TAB 1: Project Overview
+    // ================================
+    QVBoxLayout* tab1Layout = new QVBoxLayout(ui->tab1);
+    tab1Layout->addWidget(ui->content);
+    ui->content->setReadOnly(true);
+    ui->content->setText(
+        "=== Project Overview ===\n\n"
+        "This project is a front-end compiler development.\n"
+        "It contains three main tabs: Project Overview, Lexical Analysis, and Syntax Analysis.\n"
+        "You can place text, images, and other widgets here."
+    );
+    ui->content->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    ui->tab1->setLayout(tab1Layout);
+
+    // ================================
+    // TAB 2: Lexical Analysis
+    // ================================
+    QVBoxLayout* tab2Layout = new QVBoxLayout(ui->tab2);
+
+    tab2Layout->addWidget(ui->userlabel);
+    tab2Layout->addWidget(ui->userinput);
+
+    QHBoxLayout* runLayout = new QHBoxLayout();
+    runLayout->addStretch();
+    runLayout->addWidget(ui->run);
+    tab2Layout->addLayout(runLayout);
+
+    ui->dfa->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tab2Layout->addWidget(ui->dfa);
+
+    tab2Layout->addWidget(ui->tokenlabel);
+
+    ui->tokenizationtable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tab2Layout->addWidget(ui->tokenizationtable);
+
+    QHBoxLayout* navLayout = new QHBoxLayout();
+    navLayout->addWidget(ui->prev);
+    navLayout->addStretch();
+    navLayout->addWidget(ui->next);
+    tab2Layout->addLayout(navLayout);
+
+    ui->tab2->setLayout(tab2Layout);
+
+    // ================================
+    // TAB 3: Syntax Analysis
+    // ================================
+    QVBoxLayout* tab3Layout = new QVBoxLayout(ui->tab3);
+
+    tab3Layout->addWidget(ui->tokenlabel2);
+
+    ui->tokenizationtable2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tab3Layout->addWidget(ui->tokenizationtable2);
+
+    ui->parsertabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tab3Layout->addWidget(ui->parsertabs);
+
+    QHBoxLayout* run2Layout = new QHBoxLayout();
+    run2Layout->addStretch();
+    run2Layout->addWidget(ui->run2);
+    tab3Layout->addLayout(run2Layout);
+
+    ui->tab3->setLayout(tab3Layout);
+
+    // ================================
+    // Token tables: read-only + columns stretch
+    // ================================
+    ui->tokenizationtable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tokenizationtable2->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->tokenizationtable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tokenizationtable2->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // ================================
+    // Show fullscreen
+    // ================================
+    this->showFullScreen();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}

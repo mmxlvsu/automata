@@ -1,0 +1,12 @@
+# Qt/CMake build files
+/build/
+*.exe
+*.o
+*.obj
+*.user
+*.pro.user
+*.qrc.cpp
+
+# OS files
+.DS_Store
+Thumbs.db

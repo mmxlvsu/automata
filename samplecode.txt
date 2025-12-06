@@ -1,0 +1,21 @@
+# Sample Python code for testing LexicalAnalysisTab
+
+def calculate_sum(a, b):
+    total = a + b  # addition
+    if total >= 100:
+        print("Large sum!")
+    else:
+        print('Small sum!')
+    return total
+
+# Using numbers, operators, delimiters
+x = 42
+y = 3.14
+result = calculate_sum(x, y)
+
+# Unknown token example
+@unexpected_token
+
+# String literals
+message = "Hello, World!"
+another_message = 'Python Lexical Analysis'
