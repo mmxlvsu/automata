@@ -6,6 +6,8 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include <QTableWidget>
+#include <QGraphicsView>
+#include <QGraphicsScene>
 
 class LexicalAnalysisTab : public QWidget
 {
@@ -27,9 +29,8 @@ private:
     QPushButton* run;
 
     QLabel* dfa;
-    QLabel* dfaPlaceholder;
-    QPushButton* prev;
-    QPushButton* next;
+    QGraphicsScene* dfaScene;
+    QGraphicsView* dfaView;
 
     QLabel* tokenlabel;
     QTableWidget* tokenizationtable;

@@ -24,6 +24,12 @@ add_executable(MyQtApp
     LexicalAnalysisTab.h
     SyntaxAnalysisTab.cpp
     SyntaxAnalysisTab.h
+    AssignmentParser.h
+    DelimiterParser.h
+    OperationParser.h
+    AssignmentParser.cpp
+    DelimiterParser.cpp
+    OperationParser.cpp
 )
 
 # Link Qt libraries

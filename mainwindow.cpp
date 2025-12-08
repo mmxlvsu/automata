@@ -24,27 +24,28 @@ MainWindow::MainWindow(QWidget* parent)
     tabWidget->addTab(syntaxTab, "Syntax Analysis");
 
     // ================= Tab Styling =================
-    tabWidget->setStyleSheet(R"(
-        QTabBar::tab {
-            padding: 10px 50px;
-            background: rgba(128, 128, 128, 0.3); /* grey with 30% opacity */
-            color: rgba(128, 128, 128, 0.6);      /* grey with 60% opacity */
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            font-family: 'Poppins';
-            font-size: 18px;
-            font-weight: bold;
-        }
-        QTabBar::tab:selected {
-            background: #16163F;
-            color: white;
-        }
-        QTabBar::tab:!selected {
-            background: rgba(128, 128, 128, 0.3);
-            color: rgba(128, 128, 128, 0.6);
-        }
-    )");
-
+tabWidget->setStyleSheet(R"(
+    QTabBar::tab {
+        padding: 10px 60px;
+        background: rgba(128, 128, 128, 0.3); /* grey with 30% opacity */
+        color: rgba(128, 128, 128, 0.6);      /* grey with 60% opacity */
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        font-family: 'Poppins';
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 15px;   /* gap between tabs horizontally */
+        margin-top: 15px;    /* gap from top */
+    }
+    QTabBar::tab:selected {
+        background: #16163F;
+        color: white;
+    }
+    QTabBar::tab:!selected {
+        background: rgba(128, 128, 128, 0.3);
+        color: rgba(128, 128, 128, 0.6);
+    }
+)");
     // Fullscreen
     this->showFullScreen();
 }

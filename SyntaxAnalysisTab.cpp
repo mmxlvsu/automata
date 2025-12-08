@@ -1,4 +1,7 @@
 #include "SyntaxAnalysisTab.h"
+#include "AssignmentParser.h"
+#include "DelimiterParser.h"
+#include "OperationParser.h"
 #include <QFont>
 #include <QHeaderView>
 #include <QHBoxLayout>
@@ -44,48 +47,96 @@ SyntaxAnalysisTab::SyntaxAnalysisTab(QWidget* parent)
         QTabBar::tab:!selected { background: rgba(160,160,160,0.3); color: rgba(160,160,160,0.6); }
     )");
 
-    // ================= FUNCTION TO CREATE TAB LAYOUT =================
-    auto setupParserTab = [](QWidget* tab, QTextEdit*& simulator, QTextEdit*& validator,
-                             QPushButton*& run, QPushButton*& step) {
-        QVBoxLayout* layout = new QVBoxLayout(tab);
+auto setupParserTab = [](QWidget* tab, QTextEdit*& simulator, QTextEdit*& validator, QPushButton*& run) {
+    QVBoxLayout* layout = new QVBoxLayout(tab);
 
-        simulator = new QTextEdit(tab);
-        simulator->setReadOnly(true);
-        simulator->setFont(QFont("Consolas", 12));
-        simulator->setPlaceholderText("PDA Simulator log...");
-        layout->addWidget(simulator, 3);
+    // PDA Simulator title
+    QLabel* simulatorTitle = new QLabel("PDA Simulator Log:", tab);
+    simulatorTitle->setFont(QFont("Poppins", 14, QFont::Bold));
+    simulatorTitle->setAlignment(Qt::AlignCenter);
+    layout->addWidget(simulatorTitle);
 
-        validator = new QTextEdit(tab);
-        validator->setReadOnly(true);
-        validator->setFont(QFont("Poppins", 12));
-        validator->setPlaceholderText("Validation results...");
-        layout->addWidget(validator, 1);
+    simulator = new QTextEdit(tab);
+    simulator->setReadOnly(true);
+    simulator->setFont(QFont("Consolas", 12));
+    layout->addWidget(simulator, 3);
 
-        QHBoxLayout* buttonLayout = new QHBoxLayout();
-        run = new QPushButton("Run", tab);
-        run->setFont(QFont("Poppins", 10, QFont::Bold));
-        run->setStyleSheet("background-color: #16163F; color: white; padding: 10px 30px;");
+    // Validation Results title
+    QLabel* validatorTitle = new QLabel("Validation Results", tab);
+    validatorTitle->setFont(QFont("Poppins", 14, QFont::Bold));
+    validatorTitle->setAlignment(Qt::AlignCenter);
+    layout->addWidget(validatorTitle);
 
-        step = new QPushButton("Step", tab);
-        step->setFont(QFont("Poppins", 10, QFont::Bold));
-        step->setStyleSheet("background-color: #16163F; color: white; padding: 10px 30px;");
+    validator = new QTextEdit(tab);
+    validator->setReadOnly(true);
+    validator->setFont(QFont("Poppins", 12));
+    layout->addWidget(validator, 1);
 
-        buttonLayout->addStretch();
-        buttonLayout->addWidget(run);
-        buttonLayout->addWidget(step);
-        layout->addLayout(buttonLayout);
-    };
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
+    run = new QPushButton("Run", tab);
+    run->setFont(QFont("Poppins", 10, QFont::Bold));
+    run->setStyleSheet("background-color: #16163F; color: white; padding: 10px 30px;");
+    buttonLayout->addStretch();
+    buttonLayout->addWidget(run);
+    layout->addLayout(buttonLayout);
+};
 
     // ================= SETUP EACH TAB =================
-    setupParserTab(tab1, tab1Simulator, tab1Validator, tab1Run, tab1Step);
-    setupParserTab(tab2, tab2Simulator, tab2Validator, tab2Run, tab2Step);
-    setupParserTab(tab3, tab3Simulator, tab3Validator, tab3Run, tab3Step);
+    setupParserTab(tab1, tab1Simulator, tab1Validator, tab1Run);
+    setupParserTab(tab2, tab2Simulator, tab2Validator, tab2Run);
+    setupParserTab(tab3, tab3Simulator, tab3Validator, tab3Run);
 
     // ================= MAIN LAYOUT =================
     QHBoxLayout* mainLayout = new QHBoxLayout(this);
     mainLayout->addWidget(leftContainer, 2);
     mainLayout->addWidget(innerTabWidget, 3);
     setLayout(mainLayout);
+
+    // ================= UTILITY: GET CELL TEXT SAFELY =================
+    auto getCellText = [this](int row, int col) -> QString {
+        QTableWidgetItem* item = tokenizationtable->item(row, col);
+        return item ? item->text() : "";
+    };
+
+    // ================= CONNECT RUN BUTTONS =================
+    connect(tab1Run, &QPushButton::clicked, this, [=]() {
+        QList<QStringList> tokensList;
+        for (int i = 0; i < tokenizationtable->rowCount(); ++i) {
+            QStringList t;
+            t << getCellText(i,0) << getCellText(i,1) << getCellText(i,2) << getCellText(i,3);
+            tokensList.append(t);
+        }
+        tab1Simulator->clear();
+        tab1Validator->clear();
+        DelimiterParser parser(tab1Simulator, tab1Validator);
+        parser.parseTokens(tokensList);
+    });
+
+    connect(tab2Run, &QPushButton::clicked, this, [=]() {
+        QList<QStringList> tokensList;
+        for (int i = 0; i < tokenizationtable->rowCount(); ++i) {
+            QStringList t;
+            t << getCellText(i,0) << getCellText(i,1) << getCellText(i,2) << getCellText(i,3);
+            tokensList.append(t);
+        }
+        tab2Simulator->clear();
+        tab2Validator->clear();
+        AssignmentParser parser(tab2Simulator, tab2Validator);
+        parser.parseTokens(tokensList);
+    });
+
+    connect(tab3Run, &QPushButton::clicked, this, [=]() {
+        QList<QStringList> tokensList;
+        for (int i = 0; i < tokenizationtable->rowCount(); ++i) {
+            QStringList t;
+            t << getCellText(i,0) << getCellText(i,1) << getCellText(i,2) << getCellText(i,3);
+            tokensList.append(t);
+        }
+        tab3Simulator->clear();
+        tab3Validator->clear();
+        OperationParser parser(tab3Simulator, tab3Validator);
+        parser.parseTokens(tokensList);
+    });
 }
 
 // ================= UPDATE TOKEN TABLE =================

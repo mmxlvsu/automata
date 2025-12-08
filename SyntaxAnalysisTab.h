@@ -8,6 +8,11 @@
 #include <QTextEdit>
 #include <QPushButton>
 
+// Include your parsers
+#include "AssignmentParser.h"
+#include "DelimiterParser.h"
+#include "OperationParser.h"
+
 class SyntaxAnalysisTab : public QWidget
 {
     Q_OBJECT
@@ -33,17 +38,14 @@ private:
     QTextEdit* tab1Simulator;
     QTextEdit* tab1Validator;
     QPushButton* tab1Run;
-    QPushButton* tab1Step;
 
     QTextEdit* tab2Simulator;
     QTextEdit* tab2Validator;
     QPushButton* tab2Run;
-    QPushButton* tab2Step;
 
     QTextEdit* tab3Simulator;
     QTextEdit* tab3Validator;
     QPushButton* tab3Run;
-    QPushButton* tab3Step;
 };
 
 #endif // SYNTAXANALYSISTAB_H
