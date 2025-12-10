@@ -1,8 +1,0 @@
-x = 10
-y = x + 20 * 3
-result = (y - 5) / 2
-
-if result >= 10:
-    print(result)
-else:
-    result = result + 1
