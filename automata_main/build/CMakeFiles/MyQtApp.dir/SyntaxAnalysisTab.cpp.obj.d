@@ -441,7 +441,5 @@ CMakeFiles/MyQtApp.dir/SyntaxAnalysisTab.cpp.obj: \
  C:/Qt/6.10.1/mingw_64/include/QtWidgets/QTableWidgetItem \
  C:/Qt/6.10.1/mingw_64/include/QtWidgets/qtablewidget.h \
  C:/Qt/6.10.1/mingw_64/include/QtWidgets/qtableview.h \
- C:/Qt/6.10.1/mingw_64/include/QtCore/QRegularExpression \
- C:/Qt/6.10.1/mingw_64/include/QtCore/qregularexpression.h \
  C:/Qt/6.10.1/mingw_64/include/QtCore/QChar \
  C:/Qt/6.10.1/mingw_64/include/QtCore/qchar.h

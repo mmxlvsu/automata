@@ -2664,7 +2664,6 @@ CMakeFiles/MyQtApp.dir/SyntaxAnalysisTab.cpp.obj: C:/Users/lapla/Documents/autom
   C:/Qt/6.10.1/mingw_64/include/QtCore/QChar \
   C:/Qt/6.10.1/mingw_64/include/QtCore/QList \
   C:/Qt/6.10.1/mingw_64/include/QtCore/QPair \
-  C:/Qt/6.10.1/mingw_64/include/QtCore/QRegularExpression \
   C:/Qt/6.10.1/mingw_64/include/QtCore/QSet \
   C:/Qt/6.10.1/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.10.1/mingw_64/include/QtCore/q20functional.h \

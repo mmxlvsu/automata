@@ -36,13 +36,13 @@ private:
     QTextEdit* tab1Validator;
     QPushButton* tab1Run;
 
-    // Literal Validator
+    // Assignment Validator
     QWidget* tab2;
     QTextEdit* tab2Simulator;
     QTextEdit* tab2Validator;
     QPushButton* tab2Run;
 
-    // Identifier Validator
+    // Operation Validator
     QWidget* tab3;
     QTextEdit* tab3Simulator;
     QTextEdit* tab3Validator;
