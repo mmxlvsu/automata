@@ -24,12 +24,6 @@ add_executable(MyQtApp
     LexicalAnalysis.h
     SyntaxAnalysisTab.cpp
     SyntaxAnalysisTab.h
-    AssignmentParser.h
-    DelimiterParser.h
-    OperationParser.h
-    AssignmentParser.cpp
-    DelimiterParser.cpp
-    OperationParser.cpp
     NFASimulatorTab.cpp 
     NFASimulatorTab.h
     ThompsonsBuilderTab.cpp
